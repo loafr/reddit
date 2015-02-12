@@ -4,7 +4,7 @@ var app = angular.module('redditApp');
 
  app.service('FirebaseService', function ($http, $q) {
  	
- 	this.getData = function() { //something isn't working here
+ 	this.getData = function() { 
  		var deferred = $q.defer();
  		$http(
  		  {
@@ -13,7 +13,7 @@ var app = angular.module('redditApp');
  		  }
  		).then(function(response) {
  			//console.log(response);
- 			deferred.resolve(response);
+ 			deferred.resolve(response.data);
  		})
  		return deferred.promise;
  	};
@@ -29,7 +29,7 @@ var app = angular.module('redditApp');
    			url: 'https://devmtn.firebaseio.com/posts/' + post.id + '.json',
    			data: post
    		}).then(function(response){
-   			deferred.resolve;
+   			deferred.resolve(response);
    		})
    		return deferred.promise;
  	}
@@ -45,6 +45,7 @@ var app = angular.module('redditApp');
 	    {
 	    	method: 'PATCH',
 	    	url: 'https://devmtn.firebaseio.com/posts/' + id + '.json',
+	    	//data: ?
 	    }
 	    ).then(function(response) {
 	    	deferred.resolve(response);
@@ -52,12 +53,14 @@ var app = angular.module('redditApp');
 	    return deferred.promise;
  	}
 
- 	this.comment = function(id, direction) { //placeholder code
+ 	this.comment = function(id, commentText) { //placeholder code
  		var deferred = $q.defer();
+ 		debugger;
 	    $http(
 	    {
 	    	method: 'PATCH',
 	    	url: 'https://devmtn.firebaseio.com/posts/' + id + '.json',
+	    	data: commentText
 	    }
 	    ).then(function(response) {
 	    	deferred.resolve(response);

@@ -14,19 +14,19 @@ app.controller('PostsController', function ($scope, FirebaseService) {
 		FirebaseService.addPost($scope.newPost).then(function(response){
 			$scope.getPosts();
 			//console.log(response);
-			$scope.posts = response.data;
+			$scope.posts = response;
 		});
 	};
 
 	$scope.vote = function(id, direction) {
-		FirebaseService.vote().then(function(response) {
+		FirebaseService.vote(id, direction).then(function(response) {
 			$scope.getPosts();
 			//console.log(response);
 		});
 	};
 
 	$scope.submitComment = function(id, commentForm) {
-		FirebaseService.comment().then(function(response) {
+		FirebaseService.comment(id, commentForm).then(function(response) {
 			$scope.getPosts();
 			//console.log(response);
 		});
@@ -34,4 +34,4 @@ app.controller('PostsController', function ($scope, FirebaseService) {
 
 
 
-});
+}); 
