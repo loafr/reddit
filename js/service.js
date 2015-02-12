@@ -4,7 +4,7 @@ var app = angular.module('redditApp');
 
  app.service('FirebaseService', function ($http, $q) {
  	
- 	this.getData = function() { //gets data from our firebase API
+ 	this.getData = function() { //something isn't working here
  		var deferred = $q.defer();
  		$http(
  		  {
@@ -34,7 +34,7 @@ var app = angular.module('redditApp');
    		return deferred.promise;
  	}
 
- 	this.vote = function(id, direction) {
+ 	this.vote = function(id, direction) { //placeholder code
  		var deferred = $q.defer();
  		if(direction === 'up') {
 	      karma++;
@@ -52,7 +52,7 @@ var app = angular.module('redditApp');
 	    return deferred.promise;
  	}
 
- 	this.comment = function(id, direction) {
+ 	this.comment = function(id, direction) { //placeholder code
  		var deferred = $q.defer();
 	    $http(
 	    {

@@ -5,7 +5,7 @@ app.controller('PostsController', function ($scope, FirebaseService) {
  
 	$scope.getPosts = function() {
 		FirebaseService.getData().then(function(response) {
-			$scope.posts = response;
+			$scope.posts = response; // <-- this is not getting my posts from Firebase or not get setting to view
 			//console.log(response);
 		});
 	};
@@ -17,8 +17,6 @@ app.controller('PostsController', function ($scope, FirebaseService) {
 			$scope.posts = response.data;
 		});
 	};
-
-	//Create a $scope.vote function that takes the post.id and the direction and passes it into a function called firebaseService.vote()
 
 	$scope.vote = function(id, direction) {
 		FirebaseService.vote().then(function(response) {
