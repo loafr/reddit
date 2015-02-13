@@ -12,6 +12,7 @@ var app = angular.module('redditApp');
  			url: 'https://devmtn.firebaseio.com/posts.json'
  		  }
  		).then(function(response) {
+ 			//debugger;
  			//console.log(response);
  			deferred.resolve(response.data);
  		})
@@ -20,10 +21,10 @@ var app = angular.module('redditApp');
 
  	this.addPost = function(post) {
  		var deferred = $q.defer();
- 		post.timestamp = Date.now();
-    	post.comments = [];
-   		post.karma = 0;
-   		post.id = guid();
+ 	//      post.timestamp = Date.now();
+    //  	post.comments = [];
+    // 		post.karma = 0;
+    // 		post.id = guid();
    		$http({
    			method: 'PUT',
    			url: 'https://devmtn.firebaseio.com/posts/' + post.id + '.json',
@@ -34,7 +35,7 @@ var app = angular.module('redditApp');
    		return deferred.promise;
  	}
 
- 	this.vote = function(id, direction) { //placeholder code
+ 	this.vote = function(id, direction, karma) { 
  		var deferred = $q.defer();
  		if(direction === 'up') {
 	      karma++;
@@ -45,7 +46,7 @@ var app = angular.module('redditApp');
 	    {
 	    	method: 'PATCH',
 	    	url: 'https://devmtn.firebaseio.com/posts/' + id + '.json',
-	    	//data: ?
+	    	data: {karma: karma}
 	    }
 	    ).then(function(response) {
 	    	deferred.resolve(response);
@@ -53,31 +54,22 @@ var app = angular.module('redditApp');
 	    return deferred.promise;
  	}
 
- 	this.comment = function(id, commentText) { //placeholder code
- 		var deferred = $q.defer();
- 		debugger;
-	    $http(
+ 	this.comment = function(id, commentText) { 
+ 		//var deferred = $q.defer();
+ 		//debugger;
+	    return $http(
 	    {
 	    	method: 'PATCH',
 	    	url: 'https://devmtn.firebaseio.com/posts/' + id + '.json',
-	    	data: commentText
+	    	data: {comment: commentText}
 	    }
-	    ).then(function(response) {
-	    	deferred.resolve(response);
-	    })
-	    return deferred.promise;
- 	}
+	    )};
+	    //.then(function(response) {
+	    	//debugger;
+	    	//deferred.resolve(response.data);
+	    //})
+	    //return deferred.promise;
+ 	
 
- 	var guid = function() {
-    var s4 = function() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
-    };
-
-
-
+ 	
  });
