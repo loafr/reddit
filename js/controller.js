@@ -20,6 +20,7 @@ app.controller('PostsController', function ($scope, FirebaseService) {
 			// $scope.newPost.title = ''; <-- can't seem to clear the form fields
 			// $scope.newPost.body = '';
 			// $scope.newPost.author = '';
+			// $scope.newPost = {};
 		});
 	};
 
@@ -33,7 +34,7 @@ app.controller('PostsController', function ($scope, FirebaseService) {
 
 	$scope.submitComment = function(id, commentForm) {
 		FirebaseService.comment(id, commentForm).then(function(response) {
-			$scope.newPost.comments[id].push(response);
+			$scope.newPost.comments[id].push(response); // can't get comments to show 
 			$scope.getPosts();
 			$scope.newPost.commentForm = '';
 		});
